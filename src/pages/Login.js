@@ -4,7 +4,7 @@ import { Redirect } from 'react-router';
 import PropTypes from 'prop-types';
 import saveEmail from '../actions';
 
-import './Login.css';
+// import './Login.css';
 
 class Login extends React.Component {
   constructor() {
