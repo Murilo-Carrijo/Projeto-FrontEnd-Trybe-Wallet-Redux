@@ -13,6 +13,16 @@ class FormExpenses extends React.Component {
             id="value-input"
           />
         </label>
+
+        <label htmlFor="description-input">
+          Descrição
+          <input
+            type="text"
+            data-testid="description-input"
+            name="description-input"
+            id="description-input"
+          />
+        </label>
       </form>
     );
   }
