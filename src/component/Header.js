@@ -10,6 +10,10 @@ class Header extends React.Component {
         <span data-testid="email-field">
           { `Olá, seja bem vindo ${loginEmail}` }
         </span>
+
+        <span data-testid="total-field">
+          Despesa total: 0
+        </span>
       </header>
     );
   }
