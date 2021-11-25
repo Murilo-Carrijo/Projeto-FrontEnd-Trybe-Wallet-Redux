@@ -48,20 +48,19 @@ class Login extends React.Component {
   }
 
   handleRoute() {
-    this.setState({
-      changeRoute: true,
-    });
+    const { history } = this.props;
+    history.push('./carteira');
   }
 
   render() {
     const { isButtonDisabled, email, password, changeRoute } = this.state;
     const { emailDispatch } = this.props;
     return (
-      <main>
+      <form>
         TrybeWallet
 
         <label htmlFor="email">
-          Email
+          Email:
           <input
             type="email"
             data-testid="email-input"
@@ -74,7 +73,7 @@ class Login extends React.Component {
         </label>
 
         <label htmlFor="password">
-          Senha
+          Senha:
           <input
             type="password"
             data-testid="password-input"
@@ -97,7 +96,7 @@ class Login extends React.Component {
           Entrar
         </button>
         { changeRoute && <Redirect to="/carteira" />}
-      </main>
+      </form>
     );
   }
 }
@@ -107,6 +106,9 @@ const mapDispachToProps = (dispatch) => ({
 
 Login.propTypes = {
   emailDispatch: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
 };
 
 export default connect(null, mapDispachToProps)(Login);
