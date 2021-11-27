@@ -4,11 +4,11 @@ import { connect } from 'react-redux';
 
 class Header extends React.Component {
   render() {
-    const { loginEmail } = this.props;
+    const { getEmail } = this.props;
     return (
       <header>
         <span data-testid="email-field">
-          { `Olá, seja bem vindo ${loginEmail}` }
+          { `Olá, seja bem vindo ${getEmail}` }
         </span>
 
         <span data-testid="total-field">
@@ -24,10 +24,10 @@ class Header extends React.Component {
 }
 
 Header.propTypes = {
-  loginEmail: PropTypes.string.isRequired,
+  getEmail: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  loginEmail: state.user.email,
+  getEmail: state.user.email,
 });
 export default connect(mapStateToProps)(Header);

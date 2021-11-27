@@ -24,7 +24,7 @@ const mockedExchange = jest.spyOn(global, 'fetch').mockImplementation(() => apiR
 
 afterEach(() => jest.clearAllMocks());
 
-describe.only('2 - Crie uma página para sua carteira com as seguintes características:', () => {
+describe('2 - Crie uma página para sua carteira com as seguintes características:', () => {
   test('A rota para esta página deve ser \'/carteira\'', () => {
     const { history } = renderWithRouterAndStore(<App />);
     history.push('/carteira');
@@ -38,7 +38,7 @@ describe.only('2 - Crie uma página para sua carteira com as seguintes caracter�
   });
 });
 
-describe.only('3 - Crie um header para a página de carteira contendo as seguintes características:', () => {
+describe('3 - Crie um header para a página de carteira contendo as seguintes características:', () => {
   const initial = initialStateHeader;
 
   test('Um elemento que exiba o email do usuário que fez login.', () => {
@@ -66,7 +66,7 @@ describe.only('3 - Crie um header para a página de carteira contendo as seguint
   });
 });
 
-describe('4 - Desenvolva um formulário para adicionar uma despesa contendo as seguintes características:', () => {
+describe.only('4 - Desenvolva um formulário para adicionar uma despesa contendo as seguintes características:', () => {
   test('Um campo para adicionar o valor da despesa', async () => {
     renderWithRouterAndStore(<Wallet />, '/carteira');
     const valueInput = await screen.findByTestId(VALUE_INPUT_TEST_ID);
@@ -194,7 +194,7 @@ describe('4 - Desenvolva um formulário para adicionar uma despesa contendo as s
   });
 });
 
-describe.only('5 - Implemente a lógica para preencher as opções do campo "Moedas", buscando as siglas das moedas da API', () => {
+describe('5 - Implemente a lógica para preencher as opções do campo "Moedas", buscando as siglas das moedas da API', () => {
   test('O campo para selecionar em qual moeda será registrada a despesa tem as opções corretas', async () => {
     renderWithRouterAndStore(<Wallet />, '/carteira');
     const currencyInput = await screen.findByRole('combobox', {

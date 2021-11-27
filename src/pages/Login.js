@@ -1,8 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router';
 import PropTypes from 'prop-types';
-import saveEmail from '../actions';
+import { saveEmail } from '../actions';
 
 class Login extends React.Component {
   constructor() {
@@ -16,7 +15,6 @@ class Login extends React.Component {
       isButtonDisabled: true,
       email: '',
       password: '',
-      changeRoute: false,
     };
   }
 
@@ -47,16 +45,18 @@ class Login extends React.Component {
     }
   }
 
-  handleRoute() {
-    const { history } = this.props;
+  handleRoute(e) {
+    e.preventDefault();
+    const { history, getEmail } = this.props;
+    const { email } = this.state;
+    getEmail(email);
     history.push('./carteira');
   }
 
   render() {
-    const { isButtonDisabled, email, password, changeRoute } = this.state;
-    const { emailDispatch } = this.props;
+    const { isButtonDisabled, email, password } = this.state;
     return (
-      <form>
+      <form onSubmit={ this.handleRoute }>
         TrybeWallet
 
         <label htmlFor="email">
@@ -88,24 +88,19 @@ class Login extends React.Component {
         <button
           type="submit"
           disabled={ isButtonDisabled }
-          onClick={ () => {
-            emailDispatch(email);
-            this.handleRoute();
-          } }
         >
           Entrar
         </button>
-        { changeRoute && <Redirect to="/carteira" />}
       </form>
     );
   }
 }
 
 const mapDispachToProps = (dispatch) => ({
-  emailDispatch: (email) => dispatch(saveEmail(email)) });
+  getEmail: (email) => dispatch(saveEmail(email)) });
 
 Login.propTypes = {
-  emailDispatch: PropTypes.func.isRequired,
+  getEmail: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func,
   }).isRequired,

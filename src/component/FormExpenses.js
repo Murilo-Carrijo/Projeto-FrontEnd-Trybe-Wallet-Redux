@@ -1,4 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { fetchGetCurrencies } from '../actions';
 
 class FormExpenses extends React.Component {
   constructor() {
@@ -13,11 +16,17 @@ class FormExpenses extends React.Component {
 
     this.state = {
       value: '',
+      currency: '',
       description: '',
-      currency: 'USD',
-      method: 'Dinheiro',
+      method: '',
       tag: '',
     };
+  }
+
+  async componentDidMount() {
+    const { getCurrencies } = this.props;
+    const response = await getCurrencies();
+    console.log(response);
   }
 
   setInputValue() {
@@ -55,29 +64,44 @@ class FormExpenses extends React.Component {
   }
 
   setSelectCurrency() {
+    const { currencies } = this.props;
+    const { currency } = this.state;
     return (
       <label htmlFor="currency-input">
         Moeda
         <select
           id="currency-input"
           data-testid="currency-input"
+          value={ currency }
           onChange={ this.hendleChange }
         >
-          <option value="currency">Selecione a tag</option>
+          { currencies.map((currenc) => (
+            currenc === 'USDT'
+              ? null : (
+                <option
+                  value={ currenc }
+                  key={ currenc }
+                  data-testid={ currenc }
+                >
+                  { currenc }
+                </option>
+              )
+          ))}
         </select>
       </label>
     );
   }
 
   setSelectMethod() {
+    const { method } = this.state;
     return (
       <label htmlFor="tag-input">
         <select
           id="tag-input"
           data-testid="method-input"
+          value={ method }
           onChange={ this.hendleChange }
         >
-          <option value="tag">Selecione a tag</option>
           <option value="money">Dinheiro</option>
           <option value="credit">Cartão de crédito</option>
           <option value="debt">Cartão de débito</option>
@@ -87,11 +111,13 @@ class FormExpenses extends React.Component {
   }
 
   setSelectTag() {
+    const { tag } = this.state;
     return (
       <label htmlFor="tag-input">
         <select
           id="tag-input"
           data-testid="tag-input"
+          value={ tag }
           onChange={ this.hendleChange }
         >
           <option value="food">Alimentação</option>
@@ -105,9 +131,9 @@ class FormExpenses extends React.Component {
   }
 
   hendleChange({ target }) {
-    const { name, value } = target;
+    const { id, value } = target;
     this.setState({
-      [name]: value,
+      [id]: value,
     });
   }
 
@@ -125,4 +151,17 @@ class FormExpenses extends React.Component {
   }
 }
 
-export default FormExpenses;
+const mapStateToProps = (state) => ({
+  currencies: state.wallet.currencies,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  getCurrencies: () => dispatch(fetchGetCurrencies()),
+});
+
+FormExpenses.propTypes = {
+  getCurrencies: PropTypes.func.isRequired,
+  currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(FormExpenses);
