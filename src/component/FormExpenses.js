@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { fetchGetCurrencies } from '../actions';
+import { fetchGetCurrencies, saveExpense } from '../actions';
 
 class FormExpenses extends React.Component {
   constructor() {
@@ -13,6 +13,7 @@ class FormExpenses extends React.Component {
     this.setSelectMethod = this.setSelectMethod.bind(this);
     this.setSelectTag = this.setSelectTag.bind(this);
     this.hendleChange = this.hendleChange.bind(this);
+    this.submitExpense = this.submitExpense.bind(this);
 
     this.state = {
       value: '',
@@ -25,20 +26,19 @@ class FormExpenses extends React.Component {
 
   async componentDidMount() {
     const { getCurrencies } = this.props;
-    const response = await getCurrencies();
-    console.log(response);
+    await getCurrencies();
   }
 
   setInputValue() {
     const { value } = this.state;
     return (
-      <label htmlFor="value-input">
+      <label htmlFor="value">
         Valor
         <input
           type="number"
           data-testid="value-input"
           name="value-input"
-          id="value-input"
+          id="value"
           value={ value }
           onChange={ this.hendleChange }
         />
@@ -49,13 +49,13 @@ class FormExpenses extends React.Component {
   setInputDescription() {
     const { description } = this.state;
     return (
-      <label htmlFor="description-input">
+      <label htmlFor="description">
         Descrição
         <input
           type="text"
           data-testid="description-input"
           name="description-input"
-          id="description-input"
+          id="description"
           value={ description }
           onChange={ this.hendleChange }
         />
@@ -67,10 +67,10 @@ class FormExpenses extends React.Component {
     const { currencies } = this.props;
     const { currency } = this.state;
     return (
-      <label htmlFor="currency-input">
+      <label htmlFor="currency">
         Moeda
         <select
-          id="currency-input"
+          id="currency"
           data-testid="currency-input"
           value={ currency }
           onChange={ this.hendleChange }
@@ -95,9 +95,9 @@ class FormExpenses extends React.Component {
   setSelectMethod() {
     const { method } = this.state;
     return (
-      <label htmlFor="tag-input">
+      <label htmlFor="method">
         <select
-          id="tag-input"
+          id="method"
           data-testid="method-input"
           value={ method }
           onChange={ this.hendleChange }
@@ -113,9 +113,9 @@ class FormExpenses extends React.Component {
   setSelectTag() {
     const { tag } = this.state;
     return (
-      <label htmlFor="tag-input">
+      <label htmlFor="tag">
         <select
-          id="tag-input"
+          id="tag"
           data-testid="tag-input"
           value={ tag }
           onChange={ this.hendleChange }
@@ -137,9 +137,30 @@ class FormExpenses extends React.Component {
     });
   }
 
+  async submitExpense(e) {
+    e.preventDefault();
+    const { getExpenses, expenses, getCurrencies } = this.props;
+    const { value, currency, method, tag, description } = this.state;
+
+    const response = await getCurrencies();
+    const data = await response.payload;
+    const exchangeRates = data;
+
+    const expenseInfors = {
+      id: expenses.length,
+      value,
+      currency,
+      method,
+      description,
+      tag,
+      exchangeRates,
+    };
+    getExpenses(expenseInfors);
+  }
+
   render() {
     return (
-      <form>
+      <form onSubmit={ this.submitExpense }>
         { this.setInputValue() }
         { this.setInputDescription() }
         { this.setSelectCurrency() }
@@ -153,15 +174,19 @@ class FormExpenses extends React.Component {
 
 const mapStateToProps = (state) => ({
   currencies: state.wallet.currencies,
+  expenses: state.wallet.expenses,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   getCurrencies: () => dispatch(fetchGetCurrencies()),
+  getExpenses: (expenseInfors) => dispatch(saveExpense(expenseInfors)),
 });
 
 FormExpenses.propTypes = {
   getCurrencies: PropTypes.func.isRequired,
   currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
+  getExpenses: PropTypes.func.isRequired,
+  expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FormExpenses);
