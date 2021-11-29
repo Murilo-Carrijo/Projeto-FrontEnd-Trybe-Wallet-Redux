@@ -11,18 +11,17 @@ class Header extends React.Component {
 
   toConvertValue() {
     const { getExpenses } = this.props;
-    if (getExpenses.length >= 1) {
-      const totalValue = getExpenses.reduce((acc, curr) => {
-        const changeCurrency = curr.value * curr.exchangeRates[curr.currency].ask;
-        return Number(acc) + Number(changeCurrency).toFixed(2);
-      }, 0);
-      return totalValue;
-    }
-    return 0;
+    const currencyInfos = getExpenses.map((expense) => {
+      const { value, currency, exchangeRates } = expense;
+      return value * exchangeRates[currency].ask;
+    });
+
+    return currencyInfos;
   }
 
   render() {
-    const { getEmail } = this.props;
+    const { getEmail, getExpenses } = this.props;
+    const converted = this.toConvertValue();
     return (
       <header>
         <span data-testid="email-field">
@@ -30,7 +29,9 @@ class Header extends React.Component {
         </span>
 
         <span data-testid="total-field">
-          { this.toConvertValue() }
+          { !getExpenses
+            ? '0'
+            : converted.reduce((acc, curr) => acc + curr, 0).toFixed(2) }
         </span>
 
         <span data-testid="header-currency-field">
