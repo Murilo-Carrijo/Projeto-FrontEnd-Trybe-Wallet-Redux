@@ -13,12 +13,9 @@ class Header extends React.Component {
     const { getExpenses } = this.props;
     if (getExpenses.length >= 1) {
       const totalValue = getExpenses.reduce((acc, curr) => {
-        console.log(curr.exchangeRates[curr.currency].ask);
-        console.log(curr.value);
         const changeCurrency = curr.value * curr.exchangeRates[curr.currency].ask;
         return Number(acc) + Number(changeCurrency).toFixed(2);
       }, 0);
-      console.log(totalValue);
       return totalValue;
     }
     return 0;

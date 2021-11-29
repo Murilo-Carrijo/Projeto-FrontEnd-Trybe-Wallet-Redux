@@ -102,9 +102,9 @@ class FormExpenses extends React.Component {
           value={ method }
           onChange={ this.hendleChange }
         >
-          <option value="money">Dinheiro</option>
-          <option value="credit">Cartão de crédito</option>
-          <option value="debt">Cartão de débito</option>
+          <option value="Dinheiro">Dinheiro</option>
+          <option value="Cartão de crédito">Cartão de crédito</option>
+          <option value="Cartão de débito">Cartão de débito</option>
         </select>
       </label>
     );
@@ -156,6 +156,12 @@ class FormExpenses extends React.Component {
       exchangeRates,
     };
     getExpenses(expenseInfors);
+
+    this.setState({
+      value: '0',
+      description: '',
+      tag: '',
+    });
   }
 
   render() {
