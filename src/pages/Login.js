@@ -62,7 +62,7 @@ class Login extends React.Component {
         <form className="form-login" onSubmit={ this.handleRoute }>
           TrybeWallet
 
-          <label htmlFor="email">
+          <label className="label-login" htmlFor="email">
             Email:
             <input
               type="email"
@@ -72,10 +72,11 @@ class Login extends React.Component {
               value={ email }
               required
               onChange={ this.handleChange }
+              className="input-login"
             />
           </label>
 
-          <label htmlFor="password">
+          <label className="label-login" htmlFor="password">
             Senha:
             <input
               type="password"
@@ -85,10 +86,12 @@ class Login extends React.Component {
               value={ password }
               required
               onChange={ this.handleChange }
+              className="input-login"
             />
           </label>
 
           <button
+            className="button-login"
             type="submit"
             disabled={ isButtonDisabled }
           >
