@@ -75,6 +75,7 @@ class FormExpenses extends React.Component {
           value={ currency }
           onChange={ this.hendleChange }
         >
+          <option>Moeda</option>
           { currencies.map((currenc) => (
             currenc === 'USDT'
               ? null : (
@@ -102,6 +103,7 @@ class FormExpenses extends React.Component {
           value={ method }
           onChange={ this.hendleChange }
         >
+          <option>Forma de pagametno</option>
           <option value="Dinheiro">Dinheiro</option>
           <option value="Cartão de crédito">Cartão de crédito</option>
           <option value="Cartão de débito">Cartão de débito</option>
@@ -120,6 +122,7 @@ class FormExpenses extends React.Component {
           value={ tag }
           onChange={ this.hendleChange }
         >
+          <option>Selecione o tipo</option>
           <option value="Alimentação">Alimentação</option>
           <option value="Lazer">Lazer</option>
           <option value="Trabalho">Trabalho</option>

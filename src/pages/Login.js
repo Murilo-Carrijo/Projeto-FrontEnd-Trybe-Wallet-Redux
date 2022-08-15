@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { saveEmail } from '../actions';
 
+import '../style/Login.css';
+
 class Login extends React.Component {
   constructor() {
     super();
@@ -56,42 +58,44 @@ class Login extends React.Component {
   render() {
     const { isButtonDisabled, email, password } = this.state;
     return (
-      <form onSubmit={ this.handleRoute }>
-        TrybeWallet
+      <div className="container">
+        <form className="form-login" onSubmit={ this.handleRoute }>
+          TrybeWallet
 
-        <label htmlFor="email">
-          Email:
-          <input
-            type="email"
-            data-testid="email-input"
-            name="email"
-            id="email"
-            value={ email }
-            required
-            onChange={ this.handleChange }
-          />
-        </label>
+          <label htmlFor="email">
+            Email:
+            <input
+              type="email"
+              data-testid="email-input"
+              name="email"
+              id="email"
+              value={ email }
+              required
+              onChange={ this.handleChange }
+            />
+          </label>
 
-        <label htmlFor="password">
-          Senha:
-          <input
-            type="password"
-            data-testid="password-input"
-            name="password"
-            id="password"
-            value={ password }
-            required
-            onChange={ this.handleChange }
-          />
-        </label>
+          <label htmlFor="password">
+            Senha:
+            <input
+              type="password"
+              data-testid="password-input"
+              name="password"
+              id="password"
+              value={ password }
+              required
+              onChange={ this.handleChange }
+            />
+          </label>
 
-        <button
-          type="submit"
-          disabled={ isButtonDisabled }
-        >
-          Entrar
-        </button>
-      </form>
+          <button
+            type="submit"
+            disabled={ isButtonDisabled }
+          >
+            Entrar
+          </button>
+        </form>
+      </div>
     );
   }
 }
