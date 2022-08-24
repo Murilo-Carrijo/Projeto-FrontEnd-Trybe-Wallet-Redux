@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { fetchGetCurrencies, saveExpense } from '../actions';
 
+import '../style/FormExpenses.css';
+
 class FormExpenses extends React.Component {
   constructor() {
     super();
@@ -32,9 +34,10 @@ class FormExpenses extends React.Component {
   setInputValue() {
     const { value } = this.state;
     return (
-      <label htmlFor="value">
+      <label className="value-label" htmlFor="value">
         Valor
         <input
+          className="value-input"
           type="number"
           data-testid="value-input"
           name="value-input"
@@ -49,9 +52,10 @@ class FormExpenses extends React.Component {
   setInputDescription() {
     const { description } = this.state;
     return (
-      <label htmlFor="description">
+      <label className="value-label" htmlFor="description">
         Descrição
         <input
+          className="value-input"
           type="text"
           data-testid="description-input"
           name="description-input"
@@ -67,9 +71,10 @@ class FormExpenses extends React.Component {
     const { currencies } = this.props;
     const { currency } = this.state;
     return (
-      <label htmlFor="currency">
+      <label className="value-label" htmlFor="currency">
         Moeda
         <select
+          className="value-input"
           id="currency"
           data-testid="currency-input"
           value={ currency }
@@ -96,7 +101,7 @@ class FormExpenses extends React.Component {
   setSelectMethod() {
     const { method } = this.state;
     return (
-      <label htmlFor="method">
+      <label className="value-label" htmlFor="method">
         <select
           id="method"
           data-testid="method-input"
@@ -115,7 +120,7 @@ class FormExpenses extends React.Component {
   setSelectTag() {
     const { tag } = this.state;
     return (
-      <label htmlFor="tag">
+      <label className="value-label" htmlFor="tag">
         <select
           id="tag"
           data-testid="tag-input"
@@ -169,13 +174,13 @@ class FormExpenses extends React.Component {
 
   render() {
     return (
-      <form onSubmit={ this.submitExpense }>
+      <form className="form-container" onSubmit={ this.submitExpense }>
         { this.setInputValue() }
         { this.setInputDescription() }
         { this.setSelectCurrency() }
         { this.setSelectMethod() }
         { this.setSelectTag() }
-        <button type="submit">Adicionar despesa</button>
+        <button className="form-button" type="submit">Adicionar despesa</button>
       </form>
     );
   }

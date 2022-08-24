@@ -6,12 +6,12 @@
 .header-container {
   align-items: center;
   background-color: #094067;
+  border-bottom: 3px solid #90b4ce;
   color: #fffffe;
   display: flex;
   font-weight: 700;
   height: 48px;
   justify-content: space-evenly;
-  margin-bottom: 16px;
 }
 
 .value-container span {
