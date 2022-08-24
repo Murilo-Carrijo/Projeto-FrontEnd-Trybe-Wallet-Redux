@@ -1,0 +1,19 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.header-container {
+  align-items: center;
+  background-color: #094067;
+  color: #fffffe;
+  display: flex;
+  font-weight: 700;
+  height: 48px;
+  justify-content: space-evenly;
+  margin-bottom: 16px;
+}
+
+.value-container span {
+  padding: 8px;
+}

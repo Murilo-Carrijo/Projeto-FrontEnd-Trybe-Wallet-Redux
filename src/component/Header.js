@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+import '../style/Header.css';
+
 class Header extends React.Component {
   constructor() {
     super();
@@ -23,20 +25,22 @@ class Header extends React.Component {
     const { getEmail, getExpenses } = this.props;
     const converted = this.toConvertValue();
     return (
-      <header>
+      <header className="header-container">
         <span data-testid="email-field">
           { `Olá, seja bem vindo ${getEmail}` }
         </span>
 
-        <span data-testid="total-field">
-          { !getExpenses
-            ? '0'
-            : converted.reduce((acc, curr) => acc + curr, 0).toFixed(2) }
-        </span>
+        <div className="value-container">
+          <span data-testid="total-field">
+            { !getExpenses
+              ? '0'
+              : converted.reduce((acc, curr) => acc + curr, 0).toFixed(2) }
+          </span>
 
-        <span data-testid="header-currency-field">
-          BRL
-        </span>
+          <span data-testid="header-currency-field">
+            BRL
+          </span>
+        </div>
       </header>
     );
   }
