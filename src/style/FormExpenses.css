@@ -1,25 +1,24 @@
-* {
-  margin: 0;
-  padding: 0;
-}
-
 .form-container {
   align-items: center;
   background-color: #5f6c7b;
+  border-bottom: 3px solid #094067;
   display: flex;
   flex-wrap: wrap;
   height: 62px;
   justify-content: space-evenly;
+  width: 100%;
 }
 
 .value-label {
   align-items: center;
+  background-color: #5f6c7b;
   color: #fffffe;
   display: flex;
   font-weight: 500;
 }
 
 .value-input {
+  background-color: #fffffe;
   border-radius: 4px;
   font-weight: 500;
   margin-left: 8px;

@@ -1,0 +1,17 @@
+.table-contaienr {
+  background-color: #d8eefe;
+  padding: 16px;
+  text-align: center;
+  width: 100%;
+}
+
+th {
+  border-bottom: 2px dashed #094067;
+  padding: 8px;
+}
+
+td {
+  border-bottom: 2px dashed #094067;
+  padding: 8px;
+}
+

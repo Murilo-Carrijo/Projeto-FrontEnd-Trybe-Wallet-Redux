@@ -28,6 +28,7 @@
 }
 
 .label-login {
+  background-color: #fffffe;
   display: flex;
   flex-direction: column;
   font-size: 16px;
@@ -38,6 +39,7 @@
 }
 
 .input-login {
+  background-color: #fffffe;
   border: 1px solid #094067;
   border-radius: 4px;
   margin-top: 2%;
