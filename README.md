@@ -39,8 +39,6 @@ Trata-se uma carteira, onde é possível adicionar despesar e realizar a convers
   * Instale as dependências:
     * `npm install`
 
-3. Verifique se possui a extensão 'Live Server' instalada em seu VSCode.
-  * Clique no arquivo HTLM com o botao direito e selecione a opção 'Abrir com Live Server'
 
 ---
 
